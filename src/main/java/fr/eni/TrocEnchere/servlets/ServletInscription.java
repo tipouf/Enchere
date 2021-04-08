@@ -46,26 +46,40 @@ public class ServletInscription extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		String password = request.getParameter("motDePasse");
-		String confirmPassword = request.getParameter("confirmationMotDePasse");
+		String confirmPassword = request.getParameter("confirmation");
 
 		UtilisateurManager utilisateurManager = new UtilisateurManager();
 		
 		RequestDispatcher rd = null;
-		
-		if (utilisateurManager.isPseudoAvailable(pseudo)) {
-			
-			String encryptedPassword = utilisateurManager.encryptPassword(password);
-			
-			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, encryptedPassword, 100, false);
-			
-			try {
-				utilisateurManager.ajouter(utilisateur);
-			} catch(Exception e) {}
-			
-			 rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 
+		if (password.equals(confirmPassword)) {
+		
+			if (utilisateurManager.isPseudoAvailable(pseudo)) {
+
+				if (utilisateurManager.isEmailAvailable(email)) {
+
+					String encryptedPassword = utilisateurManager.encryptPassword(password);
+
+					Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, encryptedPassword, 100, false);
+
+					try {
+						utilisateurManager.ajouter(utilisateur);
+					} catch (Exception e) {
+					}
+
+					rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+
+				} else {
+					request.setAttribute("error", "L'email existe déjà");
+					rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+				}
+
+			} else {
+				request.setAttribute("error", "Le pseudo existe déjà");
+				rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+			}
 		} else {
-			request.setAttribute("error", "Le pseudo existe déjà");
+			request.setAttribute("error", "Les mots de passe ne correspondent pas");
 			rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
 		}
 		

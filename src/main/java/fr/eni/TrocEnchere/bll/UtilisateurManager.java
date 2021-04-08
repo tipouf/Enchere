@@ -34,6 +34,10 @@ public class UtilisateurManager {
 	public boolean isPseudoAvailable(String pseudo) {
 		return (utilisateurDAO.getByPseudo(pseudo) == null);
 	}
+
+	public boolean isEmailAvailable(String email) {
+		return (utilisateurDAO.getByEmail(email) == null);
+	}
 	
 	/**
 	 * Source : https://stackoverflow.com/a/33085670
