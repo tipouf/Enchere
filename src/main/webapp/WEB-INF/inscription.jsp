@@ -105,7 +105,7 @@
       </div>
         <label for="confirmation" class="col-sm-2 col-form-label">Confirmation:</label>
       <div class="col-sm-4">
-       <input type="password" class="form-control" name="motDePasse"
+       <input type="password" class="form-control" name="confirmation"
         placeholder="Confirmation du mot de passe" required>
      </div>
     </div>
