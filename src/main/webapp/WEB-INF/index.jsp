@@ -29,6 +29,18 @@
 </head>
 <body>
 
+
+
+<!-- Page Content -->
+	<div class="container">
+	    <div class="jumbotron my-4">
+	      <h1 class="display-3 text-center">Liste des enchères</h1>
+	    </div>
+   </div>
+   <div class="container margin-index">
+   -----
+   </div>
+
 	<!-- Bootstrap core JavaScript -->
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
