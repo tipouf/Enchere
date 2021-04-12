@@ -101,6 +101,12 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
     @Override
     public void insert(ArticleVendu articleVendu) throws BusinessException {
+
+        if(articleVendu == null) {
+            //be.ajouterErreur(CodesResultatDAL.INSERT_OBJECT_NULL);
+            throw new BusinessException();
+        }
+
         try (Connection cnx = ConnectionProvider.getConnection()) {
 
             try {
@@ -117,6 +123,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
                 pStmt.executeUpdate();
 
                 cnx.commit();
+
+                ResultSet rs = pStmt.getGeneratedKeys();
+                if(rs.next()) {
+                    articleVendu.setNoArticle(rs.getInt(1));
+                }
 
             } catch (SQLException e) {
                 e.printStackTrace();

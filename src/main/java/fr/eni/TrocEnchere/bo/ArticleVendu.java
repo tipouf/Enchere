@@ -10,8 +10,8 @@ public class ArticleVendu {
     String description;
     Date dateDebutEncheres;
     Date dateFinEncheres;
-    int prixInitial;
-    int prixVente;
+    int prixInitial = 0;
+    int prixVente = 0;
     Utilisateur proprietaire;
     Categorie categorie;
 
