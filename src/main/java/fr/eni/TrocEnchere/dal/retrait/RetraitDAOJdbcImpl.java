@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.eni.enchere.BusinessException;
-import fr.eni.enchere.bo.Retrait;
-import fr.eni.enchere.dal.ConnectionProvider;
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.Retrait;
+import fr.eni.TrocEnchere.dal.ConnectionProvider;
 
 public class RetraitDAOJdbcImpl implements RetraitDAO {
 
@@ -56,6 +56,8 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 		try(Connection cnx = ConnectionProvider.getConnection()) {
 
 			PreparedStatement pstmt = cnx.prepareStatement(GET_BY_ID);
+			pstmt.setInt(1, noArticle);
+
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				retrait = new Retrait(

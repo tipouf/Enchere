@@ -39,4 +39,8 @@ public class ArticleVenduManager {
     public List<ArticleVendu> afficherArticles() throws BusinessException {
         return articleVenduDAO.getAll();
     }
+
+    public ArticleVendu getById(int id) throws BusinessException {
+        return articleVenduDAO.getById(id);
+    }
 }

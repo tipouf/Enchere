@@ -18,7 +18,6 @@ import fr.eni.TrocEnchere.bo.Utilisateur;
 @WebServlet("/connexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String SALT = "salt";
 
 	/**
 	 * Page affichée lorsque l'utilisateur n'est pas connecté à l'appli

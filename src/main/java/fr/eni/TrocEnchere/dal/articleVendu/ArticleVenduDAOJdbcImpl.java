@@ -80,13 +80,13 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             ResultSet rs = pStmt.executeQuery();
 
             while (rs.next()) {
-                ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-                        rs.getString("nomArticle"),
+                ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+                        rs.getString("nom_article"),
                         rs.getString("description"),
                         rs.getDate("date_debut_encheres"),
-                        rs.getDate("date_debut_fin"),
-                        rs.getInt("nomArticle"),
-                        rs.getInt("nomArticle"),
+                        rs.getDate("date_fin_encheres"),
+                        rs.getInt("prix_initial"),
+                        rs.getInt("prix_vente"),
                         DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
                         DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
                 listes.add(nouvelArticle);
