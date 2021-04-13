@@ -1,6 +1,5 @@
 package fr.eni.TrocEnchere.bo;
 
-import java.time.LocalDate;
 import java.sql.Date;
 
 public class ArticleVendu {
@@ -22,6 +21,7 @@ public class ArticleVendu {
         this.nomArticle 		= nomArticle;
         this.description 		= description;
         this.dateDebutEncheres 	= dateDebutEncheres;
+        this.dateFinEncheres 	= dateFinEncheres;
         this.prixInitial 		= prixInitial;
         this.prixVente 			= prixVente;
         this.proprietaire 		= utilisateur;
@@ -34,6 +34,7 @@ public class ArticleVendu {
         this.nomArticle 		= nomArticle;
         this.description 		= description;
         this.dateDebutEncheres 	= dateDebutEncheres;
+        this.dateFinEncheres 	= dateFinEncheres;
         this.prixInitial 		= prixInitial;
         this.prixVente 			= prixVente;
         this.proprietaire 		= utilisateur;
