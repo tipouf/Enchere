@@ -29,7 +29,7 @@ public class ServletInscription extends HttpServlet {
 	 * Page d'inscription à l'application
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurInscription.jsp");
 		rd.forward(request, response);
 	}
 
@@ -73,7 +73,7 @@ public class ServletInscription extends HttpServlet {
 		// Redirige vers la page inscription avec un message d'erreur
 		if (error != null) {
 			request.setAttribute("error", error);
-			rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurInscription.jsp");
 			rd.forward(request, response);
 		}
 
@@ -83,7 +83,7 @@ public class ServletInscription extends HttpServlet {
 			utilisateurManager.ajouter(utilisateur);
 		} catch (Exception e) {}
 
-		rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+		rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 		rd.forward(request, response);
 	}
 }
