@@ -19,7 +19,7 @@ public class ServletEnchere extends HttpServlet {
         // L'utilisateur est-il connecté ?
         if (request.getSession().getAttribute("user_id") == null) {
             request.setAttribute("error", "Vous devez être connecté pour accéder à cette partie du site.");
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
             rd.forward(request, response);
         }
 
@@ -44,7 +44,7 @@ public class ServletEnchere extends HttpServlet {
         } catch (BusinessException e) {
             System.err.println(e.getMessage());
         }
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/enchere.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/EncheresDetail.jsp");
         rd.forward(request, response);
     }
 

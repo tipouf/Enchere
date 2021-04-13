@@ -28,6 +28,18 @@ public class ArticleVendu {
         this.categorie 			= categorie;
     }
 
+    public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres,
+                        Date dateFinEncheres,int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie) {
+        super();
+        this.nomArticle 		= nomArticle;
+        this.description 		= description;
+        this.dateDebutEncheres 	= dateDebutEncheres;
+        this.prixInitial 		= prixInitial;
+        this.prixVente 			= prixVente;
+        this.proprietaire 		= utilisateur;
+        this.categorie 			= categorie;
+    }
+
     public int getNoArticle() {
         return noArticle;
     }

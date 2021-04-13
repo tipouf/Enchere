@@ -24,7 +24,7 @@ public class ServletConnexion extends HttpServlet {
 	 * Page par défaut
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 		rd.forward(request, response);
 	}
 
@@ -52,12 +52,12 @@ public class ServletConnexion extends HttpServlet {
 				rd = request.getRequestDispatcher("./index");		
 				
 			} else {
-				rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 				request.setAttribute("error", "Mot de passe incorrect");
 			}
 
 		} else {
-			rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 			request.setAttribute("error", "Utilisateur incorrect");
 		}
 
