@@ -19,7 +19,7 @@ public class ServletEnchere extends HttpServlet {
         // L'utilisateur est-il connecté ?
         if (request.getSession().getAttribute("user_id") == null) {
             request.setAttribute("error", "Vous devez être connecté pour accéder à cette partie du site.");
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("./connexion");
             rd.forward(request, response);
         }
 

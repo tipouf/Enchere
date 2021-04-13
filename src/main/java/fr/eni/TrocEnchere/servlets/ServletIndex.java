@@ -1,4 +1,9 @@
-package fr.eni.enchere.servlets;
+package fr.eni.TrocEnchere.servlets;
+
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.ArticleVendu;
+import fr.eni.TrocEnchere.bo.Categorie;
+import fr.eni.TrocEnchere.dal.DAOFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,20 +21,19 @@ public class ServletIndex extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<String> categorie = new ArrayList<String>();
-		categorie.add("test");
-		categorie.add("test2");
-		categorie.add("test3");
+		try {
+			ArrayList<Categorie> listeCategories = (ArrayList<Categorie>) DAOFactory.getCategorieDAO().getAll();
+			ArrayList<ArticleVendu> listeArticles = (ArrayList<ArticleVendu>) DAOFactory.getArticleVenduDAO().getAll();
 
-		ArrayList<String> articles = new ArrayList<String>();
-		articles.add("articles1");
-		articles.add("articles2");
-		articles.add("articles3");
-		articles.add("articles4");
+			request.setAttribute("listeCategories", listeCategories);
+			request.setAttribute("listeArticles", listeArticles);
 
-		
-		request.setAttribute("categorie", categorie);    
-		request.setAttribute("articles", articles);   
+			System.out.println(listeArticles.get(0).getDateFinEncheres());
+
+		} catch (BusinessException e) {
+			System.err.println(e.getMessage());
+		}
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 		rd.forward(request, response);
 	}

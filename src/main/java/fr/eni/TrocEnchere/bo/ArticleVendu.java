@@ -22,6 +22,7 @@ public class ArticleVendu {
         this.nomArticle 		= nomArticle;
         this.description 		= description;
         this.dateDebutEncheres 	= dateDebutEncheres;
+        this.dateFinEncheres 	= dateFinEncheres;
         this.prixInitial 		= prixInitial;
         this.prixVente 			= prixVente;
         this.proprietaire 		= utilisateur;
