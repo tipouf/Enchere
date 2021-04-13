@@ -1,5 +1,9 @@
 package fr.eni.TrocEnchere.dal.retrait;
 
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.Retrait;
+import fr.eni.TrocEnchere.dal.ConnectionProvider;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
