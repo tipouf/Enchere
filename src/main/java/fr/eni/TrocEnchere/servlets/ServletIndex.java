@@ -1,4 +1,4 @@
-package fr.eni.TrocEnchere.servlets;
+package fr.eni.enchere.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
