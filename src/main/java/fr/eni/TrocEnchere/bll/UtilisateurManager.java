@@ -30,6 +30,10 @@ public class UtilisateurManager {
 	public Utilisateur getByEmailOrPseudo(String emailOrPseudo) {
 		return utilisateurDAO.getByEmailOrPseudo(emailOrPseudo);
 	}
+
+	public Utilisateur getById(int userId) {
+		return utilisateurDAO.getById(userId);
+	}
 	
 	public boolean isPseudoAvailable(String pseudo) {
 		return (utilisateurDAO.getByPseudo(pseudo) == null);

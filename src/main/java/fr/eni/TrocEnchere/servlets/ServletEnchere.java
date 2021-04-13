@@ -1,41 +1,55 @@
 package fr.eni.TrocEnchere.servlets;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bll.ArticleVenduManager;
+import fr.eni.TrocEnchere.bll.RetraitManager;
+import fr.eni.TrocEnchere.bo.ArticleVendu;
+import fr.eni.TrocEnchere.bo.Retrait;
 
-/**
- * Servlet implementation class ServletEnchere
- */
-@WebServlet("/ServletEnchere")
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.io.IOException;
+
+@WebServlet("/enchere/*")
 public class ServletEnchere extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletEnchere() {
-        super();
-        // TODO Auto-generated constructor stub
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // L'utilisateur est-il connecté ?
+        if (request.getSession().getAttribute("user_id") == null) {
+            request.setAttribute("error", "Vous devez être connecté pour accéder à cette partie du site.");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+            rd.forward(request, response);
+        }
+
+        // L'URL est-elle au format /enchere/articleId
+        if (request.getPathInfo() == null) {
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            rd.forward(request, response);
+        }
+
+        int articleId = Integer.parseInt(request.getPathInfo().replace("/", ""));
+
+        ArticleVenduManager articleManager = new ArticleVenduManager();
+        RetraitManager retraitManager = new RetraitManager();
+
+        try {
+            ArticleVendu article = articleManager.getById(articleId);
+            Retrait retrait = retraitManager.getById(articleId);
+
+            request.setAttribute("article", article);
+            request.setAttribute("retrait", retrait);
+
+        } catch (BusinessException e) {
+            System.err.println(e.getMessage());
+        }
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/enchere.jsp");
+        rd.forward(request, response);
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+    }
 }

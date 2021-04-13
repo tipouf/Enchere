@@ -23,7 +23,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String GET_BY_ID = 
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
 		  + "FROM UTILISATEURS "
-		  + "WHERE noUtilisateur = ?;";
+		  + "WHERE no_utilisateur = ?;";
 	
 	private static final String GET_BY_EMAIL = 
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "

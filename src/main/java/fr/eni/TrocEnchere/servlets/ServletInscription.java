@@ -24,7 +24,6 @@ import fr.eni.TrocEnchere.bo.Utilisateur;
 @WebServlet("/inscription")
 public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String SALT = "salt";
 
 	/**
 	 * Page d'inscription à l'application
@@ -78,7 +77,7 @@ public class ServletInscription extends HttpServlet {
 			rd.forward(request, response);
 		}
 
-		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, utilisateurManager.encryptPassword(password), 100, false);
+		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, utilisateurManager.encryptPassword(password), 0, false);
 
 		try {
 			utilisateurManager.ajouter(utilisateur);

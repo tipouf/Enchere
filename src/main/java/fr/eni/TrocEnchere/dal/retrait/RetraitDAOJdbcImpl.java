@@ -9,6 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.Retrait;
+import fr.eni.TrocEnchere.dal.ConnectionProvider;
+
 public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 	private static final String INSERT = "INSERT INTO RETRAITS (no_article, rue, code_postal, ville) VALUES (?, ?, ?, ?)";
@@ -56,6 +60,8 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 		try(Connection cnx = ConnectionProvider.getConnection()) {
 
 			PreparedStatement pstmt = cnx.prepareStatement(GET_BY_ID);
+			pstmt.setInt(1, noArticle);
+
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				retrait = new Retrait(
