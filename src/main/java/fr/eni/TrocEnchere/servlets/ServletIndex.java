@@ -1,13 +1,5 @@
 package fr.eni.TrocEnchere.servlets;
 
-import fr.eni.TrocEnchere.BusinessException;
-import fr.eni.TrocEnchere.bll.ArticleVenduManager;
-import fr.eni.TrocEnchere.bll.CategorieManager;
-import fr.eni.TrocEnchere.bll.UtilisateurManager;
-import fr.eni.TrocEnchere.bo.ArticleVendu;
-import fr.eni.TrocEnchere.bo.Categorie;
-import fr.eni.TrocEnchere.dal.DAOFactory;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -17,6 +9,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bll.ArticleVenduManager;
+import fr.eni.TrocEnchere.bll.CategorieManager;
+import fr.eni.TrocEnchere.bll.UtilisateurManager;
+import fr.eni.TrocEnchere.bo.ArticleVendu;
+import fr.eni.TrocEnchere.bo.Categorie;
+import fr.eni.TrocEnchere.dal.DAOFactory;
 
 @WebServlet("/index")
 public class ServletIndex extends HttpServlet {
