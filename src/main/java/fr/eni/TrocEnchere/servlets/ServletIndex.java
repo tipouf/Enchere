@@ -22,14 +22,53 @@ import fr.eni.TrocEnchere.dal.DAOFactory;
 public class ServletIndex extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		CategorieManager categorieManager = new CategorieManager();
+		ArticleVenduManager articleManager = new ArticleVenduManager();
 		try {
-			ArrayList<Categorie> listeCategories = new CategorieManager().getAll();
-			ArrayList<ArticleVendu> listeArticles = new ArticleVenduManager().getAll();
 
+			String categorie = request.getParameter("categorie");
+			String recherche = request.getParameter("inputRecherche");
+			String rechercheWithAccent = "";
+
+			if(categorie == null) {
+				categorie = "toutes";
+			}
+
+			String categorieWithAccent = new String(categorie.getBytes(),Charset.forName("UTF-8"));
+
+			if(recherche != null) {
+				rechercheWithAccent = new String(recherche.getBytes(),Charset.forName("UTF-8"));
+			}
+			ArrayList<Categorie> listeCategories = categorieManager.getAll()  ;
 			request.setAttribute("listeCategories", listeCategories);
+
+			ArrayList<ArticleVendu> listeArticles = new ArrayList<ArticleVendu>();
+
+			if(categorie.equalsIgnoreCase("toutes") && recherche == null) {
+				listeArticles = (ArrayList<ArticleVendu>) articleManager.getAll();
+			};
+
+			if(categorie.equalsIgnoreCase("toutes") && recherche != null) {
+				listeArticles = (ArrayList<ArticleVendu>) articleManager.filtreParTitre(rechercheWithAccent);
+			};
+
+			if(!categorie.equalsIgnoreCase("toutes") && recherche == null){
+				int noCategorie = categorieManager.getByLibelle(categorie);
+				System.out.println("noCategorie = " + noCategorie);
+				listeArticles = (ArrayList<ArticleVendu>) articleManager.filtreParCategorie(noCategorie) ;
+			};
+
+			if(!categorie.equalsIgnoreCase("toutes") && recherche != null){
+				int noCategorie = categorieManager.getByLibelle(categorieWithAccent);
+				listeArticles = (ArrayList<ArticleVendu>) articleManager.filtreParRechercheEtCategorie(rechercheWithAccent, noCategorie) ;
+			};
+
 			request.setAttribute("listeArticles", listeArticles);
+			request.setAttribute("categorieSelectionnee", categorieWithAccent);
+			request.setAttribute("inputRecherche", rechercheWithAccent);
 
 		} catch (BusinessException e) {
 			System.err.println(e.getMessage());

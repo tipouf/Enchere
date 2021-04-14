@@ -18,6 +18,8 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
     private static final String GET_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie =?";
 
+    private static final String GET_BY_LIBELLE = "SELECT * FROM CATEGORIES WHERE libelle =?";
+
     @Override
     public Categorie getById(int id){
         List<Categorie> listes = new ArrayList<>();
@@ -62,4 +64,25 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 
         return listes;
     }
+
+    @Override
+	public int getByLibelle(String libelle) {
+		  int noCategorie = 0;
+		  
+	        try(Connection cnx = ConnectionProvider.getConnection()) {
+	            PreparedStatement pStmt = cnx.prepareStatement(GET_BY_LIBELLE);
+	            pStmt.setString(1, libelle);
+
+	            ResultSet rs = pStmt.executeQuery();
+
+	            while(rs.next()) {
+	                noCategorie = rs.getInt("no_categorie");
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return noCategorie;
+	    }
 }

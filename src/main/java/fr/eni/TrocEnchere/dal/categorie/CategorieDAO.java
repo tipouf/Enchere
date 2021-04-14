@@ -8,5 +8,5 @@ import java.util.List;
 public interface CategorieDAO {
     public Categorie getById(int id);
     public List<Categorie> getAll();
-
+    public int getByLibelle(String libelle);
 }

@@ -45,4 +45,17 @@ public class ArticleVenduManager {
     public ArticleVendu getById(int id) throws BusinessException {
         return articleVenduDAO.getById(id);
     }
+
+    public List<ArticleVendu> filtreParTitre(String recherche) throws BusinessException {
+		return articleVenduDAO.filtreParTitre(recherche);
+	}
+
+	public List<ArticleVendu> filtreParCategorie(int noCategorie) throws BusinessException {
+		return articleVenduDAO.filtreParCategorie(noCategorie);
+	}
+	
+	public List<ArticleVendu> filtreParRechercheEtCategorie(String recherche, int noCategorie) throws BusinessException {
+		return articleVenduDAO.filtreParRechercheEtCategorie(recherche, noCategorie);
+	}
+}
 }
