@@ -11,8 +11,6 @@ import fr.eni.TrocEnchere.bo.Retrait;
 import fr.eni.TrocEnchere.bo.Utilisateur;
 import fr.eni.TrocEnchere.dal.ConnectionProvider;
 
-import javax.rmi.CORBA.Util;
-
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static final String INSERT = 
