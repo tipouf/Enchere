@@ -41,6 +41,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             "no_categorie = ? " +
             "WHERE no_article = ? ";
 
+    private static final String FILTER_BY_TITLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
+	private static final String FILTER_BY_CATEGORY = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
+	private static final String FILTER_BY_TITLE_CATEGORY = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ? AND no_Categorie = ?";
+
+
     @Override
     public List<ArticleVendu> getAll() throws BusinessException {
         List<ArticleVendu> listes = new ArrayList<>();
@@ -173,4 +178,88 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             e.printStackTrace();
         }
     }
+    	@Override
+	public List<ArticleVendu> filtreParTitre(String nomRecherche) throws BusinessException {
+		List<ArticleVendu> listes = new ArrayList<>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(FILTER_BY_TITLE);
+			pStmt.setString(1, "%"+nomRecherche+"%");
+			ResultSet rs = pStmt.executeQuery();
+
+			while (rs.next()) {
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
+						rs.getString("nomArticle"),
+						rs.getString("description"),
+						rs.getDate("date_debut_encheres"),
+						rs.getDate("date_debut_fin"),
+						rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"),
+						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
+						DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
+				listes.add(nouvelArticle);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listes;
+	}
+
+	@Override
+	public List<ArticleVendu> filtreParCategorie(int noCategorie) throws BusinessException {
+		List<ArticleVendu> listes = new ArrayList<>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(FILTER_BY_CATEGORY);
+			pStmt.setInt(1, noCategorie);
+			ResultSet rs=pStmt.executeQuery();
+
+			while (rs.next()) {
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
+						rs.getString("nomArticle"),
+						rs.getString("description"),
+						rs.getDate("date_debut_encheres"),
+						rs.getDate("date_debut_fin"),
+						rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"),
+						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
+						DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
+				listes.add(nouvelArticle);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listes;
+	}
+
+	@Override
+	public List<ArticleVendu> filtreParRechercheEtCategorie(String nomRecherche, int noCategorie) throws BusinessException {
+		List<ArticleVendu> listes = new ArrayList<>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(FILTER_BY_TITLE_CATEGORY);
+			pStmt.setString(1, "%"+nomRecherche+"%");
+			pStmt.setInt(2, noCategorie);
+			ResultSet rs=pStmt.executeQuery();
+
+			while (rs.next()) {
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
+						rs.getString("nomArticle"),
+						rs.getString("description"),
+						rs.getDate("date_debut_encheres"),
+						rs.getDate("date_debut_fin"),
+						rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"),
+						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
+						DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
+				listes.add(nouvelArticle);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listes;
+	}
 }
