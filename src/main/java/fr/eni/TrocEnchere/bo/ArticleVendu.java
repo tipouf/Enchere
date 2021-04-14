@@ -29,7 +29,7 @@ public class ArticleVendu {
     }
 
     public ArticleVendu(String nomArticle, String description, Date dateDebutEncheres,
-                        Date dateFinEncheres,int prixInitial, int prixVente, Utilisateur utilisateur, Categorie categorie) {
+                        Date dateFinEncheres,int prixInitial, Utilisateur utilisateur, Categorie categorie) {
         super();
         this.nomArticle 		= nomArticle;
         this.description 		= description;

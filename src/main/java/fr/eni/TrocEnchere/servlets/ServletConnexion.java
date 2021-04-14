@@ -24,7 +24,9 @@ public class ServletConnexion extends HttpServlet {
 	 * Page par défaut
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+		request.setAttribute("pageAAfficher", "UtilisateurConnexion.jsp");
+
 		rd.forward(request, response);
 	}
 
@@ -49,16 +51,22 @@ public class ServletConnexion extends HttpServlet {
 				// Ajout d'une variable de session "user_id" pour autoriser l'accès aux autres pages du site
 				request.getSession().setAttribute("user_id", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getNoUtilisateur());
 				
-				rd = request.getRequestDispatcher("./index");		
-				
+				rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+				request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
+
+
 			} else {
-				rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
 				request.setAttribute("error", "Mot de passe incorrect");
+				request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
+
 			}
 
 		} else {
-			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
 			request.setAttribute("error", "Utilisateur incorrect");
+			request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
+
 		}
 
 		rd.forward(request, response);

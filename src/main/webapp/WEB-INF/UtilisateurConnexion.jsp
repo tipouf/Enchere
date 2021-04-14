@@ -28,7 +28,7 @@
           rel="stylesheet">
 </head>
 <body>
-<%@include file="entete.jsp" %>
+<%--<%@include file="entete.jsp" %>--%>
 <div class="container jumbotron marginConnexion">
     <h1 class="display-4 text-left">Connexion</h1>
     <div class="card-body">
