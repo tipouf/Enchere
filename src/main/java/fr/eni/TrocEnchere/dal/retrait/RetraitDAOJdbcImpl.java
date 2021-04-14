@@ -1,13 +1,17 @@
 package fr.eni.TrocEnchere.dal.retrait;
 
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.Retrait;
+import fr.eni.TrocEnchere.dal.ConnectionProvider;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.eni.enchere.BusinessException;
-import fr.eni.enchere.bo.Retrait;
-import fr.eni.enchere.dal.ConnectionProvider;
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.Retrait;
+import fr.eni.TrocEnchere.dal.ConnectionProvider;
 
 public class RetraitDAOJdbcImpl implements RetraitDAO {
 
@@ -30,7 +34,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 			try {
 				PreparedStatement pStmt = cnx.prepareStatement(INSERT);
-				cnx.setAutoCommit(false);
+				//cnx.setAutoCommit(false);
 				pStmt.setInt(1, retrait.getNoArticle());
 				pStmt.setString(2, retrait.getRue());
 				pStmt.setString(3, retrait.getCodePostal());
@@ -38,12 +42,12 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 				pStmt.executeUpdate();
 
-				cnx.commit();
+				//cnx.commit();
 
 			} catch (SQLException e) {
 				e.printStackTrace();
 
-				cnx.rollback();
+				//cnx.rollback();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,6 +60,8 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 		try(Connection cnx = ConnectionProvider.getConnection()) {
 
 			PreparedStatement pstmt = cnx.prepareStatement(GET_BY_ID);
+			pstmt.setInt(1, noArticle);
+
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				retrait = new Retrait(

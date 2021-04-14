@@ -7,14 +7,33 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.Retrait;
 import fr.eni.TrocEnchere.bo.Utilisateur;
 import fr.eni.TrocEnchere.dal.ConnectionProvider;
+
+import javax.rmi.CORBA.Util;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static final String INSERT = 
 			"INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) "
 		  + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+	private static final String UPDATE =
+			"UPDATE UTILISATEURS " +
+			"SET " +
+				"pseudo = ?," +
+				"nom = ?," +
+				"prenom = ?," +
+				"email = ?," +
+				"telephone = ?," +
+				"rue = ?," +
+				"code_postal = ?," +
+				"ville = ?," +
+				"mot_de_passe = ?," +
+				"credit = ?," +
+				"administrateur = ? " +
+			"WHERE no_utilisateur = ?;";
 	
 	private static final String SELECT = 
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
@@ -23,7 +42,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String GET_BY_ID = 
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
 		  + "FROM UTILISATEURS "
-		  + "WHERE noUtilisateur = ?;";
+		  + "WHERE no_utilisateur = ?;";
 	
 	private static final String GET_BY_EMAIL = 
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
@@ -39,6 +58,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
 		  + "FROM UTILISATEURS "
 		  + "WHERE email LIKE ? OR pseudo LIKE ?;";
+
+	private static final String DELETE =
+			"DELETE FROM UTILISATEURS" +
+			"WHERE no_utilisateur = ?;";
 	
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
@@ -122,6 +145,25 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		return listeUtilisateurs;
+	}
+
+	@Override
+	public void delete(Utilisateur utilisateur) {
+		this.delete(utilisateur.getNoUtilisateur());
+	}
+
+	@Override
+	public void delete(int noUtilisateur) {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			PreparedStatement pStmt = cnx.prepareStatement(DELETE);
+			pStmt.setInt(1, noUtilisateur);
+
+			pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -218,6 +260,30 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 		return utilisateur;
 	}
+
+	public void update(Utilisateur utilisateur) {
+
+		try(Connection cnx = ConnectionProvider.getConnection()) {
+
+			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
+			pStmt.setString(1, utilisateur.getPseudo().toString());
+			pStmt.setString(2, utilisateur.getNom().toString());
+			pStmt.setString(3, utilisateur.getPrenom().toString());
+			pStmt.setString(4, utilisateur.getEmail().toString());
+			pStmt.setString(5, utilisateur.getTelephone().toString());
+			pStmt.setString(6, utilisateur.getRue().toString());
+			pStmt.setString(7, utilisateur.getCodePostal().toString());
+			pStmt.setString(8, utilisateur.getVille().toString());
+			pStmt.setString(9, utilisateur.getMotDePasse().toString());
+			pStmt.setInt(10, utilisateur.getCredit());
+			pStmt.setBoolean(11, utilisateur.isAdministrateur());
+			pStmt.setInt(12, utilisateur.getNoUtilisateur());
+			pStmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	private Utilisateur parseResultRow(ResultSet rs) {
 		
@@ -241,7 +307,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			);
 			
 		} catch(SQLException e) {
-			
+			System.err.println(e.getMessage());
 		}
 		
 		return utilisateur;

@@ -18,14 +18,13 @@ import fr.eni.TrocEnchere.bo.Utilisateur;
 @WebServlet("/connexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String SALT = "salt";
 
 	/**
 	 * Page affichée lorsque l'utilisateur n'est pas connecté à l'appli
 	 * Page par défaut
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 		rd.forward(request, response);
 	}
 
@@ -53,12 +52,12 @@ public class ServletConnexion extends HttpServlet {
 				rd = request.getRequestDispatcher("./index");		
 				
 			} else {
-				rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 				request.setAttribute("error", "Mot de passe incorrect");
 			}
 
 		} else {
-			rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 			request.setAttribute("error", "Utilisateur incorrect");
 		}
 

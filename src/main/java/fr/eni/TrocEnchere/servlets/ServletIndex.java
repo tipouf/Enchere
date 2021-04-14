@@ -24,11 +24,9 @@ public class ServletIndex extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		CategorieManager categorieManager = new CategorieManager();
-		ArticleVenduManager articleManager = new ArticleVenduManager();
 		try {
-			ArrayList<Categorie> listeCategories = categorieManager.getAll()  ;
-			ArrayList<ArticleVendu> listeArticles = (ArrayList<ArticleVendu>) articleManager.afficherArticles() ;
+			ArrayList<Categorie> listeCategories = new CategorieManager().getAll();
+			ArrayList<ArticleVendu> listeArticles = new ArticleVenduManager().getAll();
 
 			request.setAttribute("listeCategories", listeCategories);
 			request.setAttribute("listeArticles", listeArticles);
@@ -36,7 +34,7 @@ public class ServletIndex extends HttpServlet {
 		} catch (BusinessException e) {
 			System.err.println(e.getMessage());
 		}
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 		rd.forward(request, response);
 	}

@@ -28,7 +28,7 @@ public class RetraitManager {
 		retraitDAO.delete(retrait);;
 	}
 
-	public Retrait SelectParId(int noArticle) throws BusinessException {
+	public Retrait getById(int noArticle) throws BusinessException {
 
 		return retraitDAO.getById(noArticle);
 	}

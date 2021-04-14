@@ -24,13 +24,12 @@ import fr.eni.TrocEnchere.bo.Utilisateur;
 @WebServlet("/inscription")
 public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final String SALT = "salt";
 
 	/**
 	 * Page d'inscription à l'application
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurInscription.jsp");
 		rd.forward(request, response);
 	}
 
@@ -69,22 +68,25 @@ public class ServletInscription extends HttpServlet {
 
 		} else if (!matcher.matches()) {
 			error = "Le pseudo ne doit contenir que des caractères alphanumériques";
+
+		} else {
+			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, utilisateurManager.encryptPassword(password), 0, false);
+
+			try {
+				utilisateurManager.ajouter(utilisateur);
+			} catch (Exception e) {}
 		}
 
 		// Redirige vers la page inscription avec un message d'erreur
 		if (error != null) {
 			request.setAttribute("error", error);
-			rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/UtilisateurInscription.jsp");
 			rd.forward(request, response);
 		}
 
-		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, utilisateurManager.encryptPassword(password), 100, false);
 
-		try {
-			utilisateurManager.ajouter(utilisateur);
-		} catch (Exception e) {}
 
-		rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+		rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
 		rd.forward(request, response);
 	}
 }

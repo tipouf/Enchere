@@ -22,7 +22,7 @@
 
 			<c:choose>
 				<c:when test="${pageContext.request.servletPath != '/WEB-INF/UtilisateurConnexion.jsp'
-				&& pageContext.request.servletPath != '/WEB-INF/UtilisateurInscription.jsp'}">
+				&& pageContext.request.servletPath != '/WEB-INF/UtilisateurInscription.jsp' }">
 					<c:choose>
 						<c:when test="${sessionScope.user_id != null}">
 							<a class="ml-auto align-right"
@@ -47,6 +47,5 @@
 			</c:choose>
 		</div>
 	</nav>
-	
 </body>
 </html>

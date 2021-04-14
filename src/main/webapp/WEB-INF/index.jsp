@@ -2,31 +2,29 @@
 <html>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+         pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<title>Bienvenue sur Enchere-ENI</title>
-<c:set var="context" value="${pageContext.request.contextPath}" />
-<!-- Bootstrap core CSS -->
-<link href="${context}/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
+    <title>Bienvenue sur Enchere-ENI</title>
+    <c:set var="context" value="${pageContext.request.contextPath}"/>
+    <!-- Bootstrap core CSS -->
+    <link href="${context}/vendor/bootstrap/css/bootstrap.min.css"
+          rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="${context}/css/index.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="${context}/css/index.css" rel="stylesheet">
 
-<%@include file="entete.jsp"%>
 </head>
 <body>
-
 
 	<!-- Page Content -->
 	<div class="container">
@@ -123,10 +121,8 @@
 
 	<%@include file="listeVente.jsp"%>
 
-
 	<!-- Bootstrap core JavaScript -->
 	<script src="${context}/vendor/jquery/jquery-3.6.0.min.js"></script>
 	<script src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

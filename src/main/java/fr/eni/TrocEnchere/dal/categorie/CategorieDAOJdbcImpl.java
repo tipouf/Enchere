@@ -14,12 +14,12 @@ import java.util.List;
 
 public class CategorieDAOJdbcImpl implements CategorieDAO {
 
-    private static final String GET_ALL = "SELECT * FROM ARTICLES_VENDUS";
+    private static final String GET_ALL = "SELECT * FROM CATEGORIES";
 
-    private static final String GET_BY_ID = "SELECT * FROM ARTICLES_VENDUS WHERE no_article =?";
+    private static final String GET_BY_ID = "SELECT * FROM CATEGORIES WHERE no_categorie =?";
 
     @Override
-    public Categorie getById(int id) throws BusinessException {
+    public Categorie getById(int id){
         List<Categorie> listes = new ArrayList<>();
 
         try(Connection cnx = ConnectionProvider.getConnection()) {
@@ -42,7 +42,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
     }
 
     @Override
-    public List<Categorie> getAll() throws BusinessException {
+    public List<Categorie> getAll(){
         List<Categorie> listes = new ArrayList<>();
 
         try(Connection cnx = ConnectionProvider.getConnection()) {
