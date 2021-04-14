@@ -10,7 +10,9 @@ public interface UtilisateurDAO {
 	public void insert(Utilisateur utilisateur) throws BusinessException;
 	
 	public ArrayList<Utilisateur> getAll();
-	
+
+	public void update(Utilisateur utilisateur);
+
 	public Utilisateur getByEmail(String email);
 	
 	public Utilisateur getById(int id);
@@ -18,4 +20,5 @@ public interface UtilisateurDAO {
 	public Utilisateur getByEmailOrPseudo(String emailOrPseudo);
 	
 	public Utilisateur getByPseudo(String email);
+
 }
