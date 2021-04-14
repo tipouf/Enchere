@@ -5,9 +5,11 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Random;
 
 import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.Categorie;
 import fr.eni.TrocEnchere.bo.Utilisateur;
 import fr.eni.TrocEnchere.dal.DAOFactory;
 import fr.eni.TrocEnchere.dal.util.UtilisateurDAO;
@@ -19,6 +21,12 @@ public class UtilisateurManager {
 	public UtilisateurManager() {
 		utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
+
+	public ArrayList<Utilisateur> getAll() { return utilisateurDAO.getAll(); }
+
+	public void update(Utilisateur utilisateur) throws BusinessException {
+		utilisateurDAO.update(utilisateur);
+	}
 	
 	public Utilisateur ajouter(Utilisateur utilisateur) throws BusinessException {
 		
@@ -29,6 +37,10 @@ public class UtilisateurManager {
 	
 	public Utilisateur getByEmailOrPseudo(String emailOrPseudo) {
 		return utilisateurDAO.getByEmailOrPseudo(emailOrPseudo);
+	}
+
+	public Utilisateur getById(int userId) {
+		return utilisateurDAO.getById(userId);
 	}
 	
 	public boolean isPseudoAvailable(String pseudo) {

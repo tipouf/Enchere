@@ -38,7 +38,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             "prix_initial = ?," +
             "prix_vente = ?," +
             "no_utilisateur = ?," +
-            "no_categorie = ?," +
+            "no_categorie = ? " +
             "WHERE no_article = ? ";
 
     @Override
@@ -51,11 +51,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             ResultSet rs = stmt.executeQuery(GET_ALL);
 
             while (rs.next()) {
-                ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-                        rs.getString("nomArticle"),
+                ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+                        rs.getString("nom_article"),
                         rs.getString("description"),
                         rs.getDate("date_debut_encheres"),
-                        rs.getDate("date_debut_fin"),
+                        rs.getDate("date_fin_encheres"),
                         rs.getInt("prix_initial"),
                         rs.getInt("prix_vente"),
                         DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
@@ -71,7 +71,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
     @Override
     public ArticleVendu getById(int id) throws BusinessException {
-        List<ArticleVendu> listes = new ArrayList<>();
+        ArticleVendu nouvelArticle = null;
 
         try (Connection cnx = ConnectionProvider.getConnection()) {
             PreparedStatement pStmt = cnx.prepareStatement(GET_BY_ID);
@@ -80,27 +80,32 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             ResultSet rs = pStmt.executeQuery();
 
             while (rs.next()) {
-                ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-                        rs.getString("nomArticle"),
+                nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+                        rs.getString("nom_article"),
                         rs.getString("description"),
                         rs.getDate("date_debut_encheres"),
-                        rs.getDate("date_debut_fin"),
-                        rs.getInt("nomArticle"),
-                        rs.getInt("nomArticle"),
+                        rs.getDate("date_fin_encheres"),
+                        rs.getInt("prix_initial"),
+                        rs.getInt("prix_vente"),
                         DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
                         DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
-                listes.add(nouvelArticle);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return listes.get(0);
+        return nouvelArticle;
     }
 
     @Override
     public void insert(ArticleVendu articleVendu) throws BusinessException {
+
+        if(articleVendu == null) {
+            //be.ajouterErreur(CodesResultatDAL.INSERT_OBJECT_NULL);
+            throw new BusinessException();
+        }
+
         try (Connection cnx = ConnectionProvider.getConnection()) {
 
             try {
@@ -117,6 +122,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
                 pStmt.executeUpdate();
 
                 cnx.commit();
+
+                ResultSet rs = pStmt.getGeneratedKeys();
+                if(rs.next()) {
+                    articleVendu.setNoArticle(rs.getInt(1));
+                }
 
             } catch (SQLException e) {
                 e.printStackTrace();
