@@ -50,6 +50,10 @@ public class UtilisateurManager {
 	public boolean isEmailAvailable(String email) {
 		return (utilisateurDAO.getByEmail(email) == null);
 	}
+
+	public void delete(int userId) throws BusinessException {
+		utilisateurDAO.delete(userId);
+	}
 	
 	/**
 	 * Source : https://stackoverflow.com/a/33085670
