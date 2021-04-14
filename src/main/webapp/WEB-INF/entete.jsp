@@ -31,7 +31,7 @@
 							   href="${context}/vendre">Vendre un
 								articles </a>
 							<a class="ml-auto align-right"
-							   href="${context}/monProfil">Mon profil
+							   href="${context}/ServletProfil">Mon profil
 							</a>
 							<a class="ml-auto align-right"
 							   href="${context}/ServletDeconnexion">Déconnexion

@@ -9,6 +9,21 @@
 <html>
 <head>
     <title>Title</title>
+
+    <form action="" method="post">
+        <input type="number" name="montant">
+        <input type="submit" value="Test">
+    </form>
+
+    <% String error = (String) request.getAttribute("error"); %>
+
+    <%
+        if (error != null) {
+    %>
+    <span class="text-danger"><%=error%></span>
+    <%
+        }
+    %>
 </head>
 <body>
 

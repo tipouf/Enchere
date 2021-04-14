@@ -5,6 +5,7 @@ import fr.eni.TrocEnchere.bo.ArticleVendu;
 import fr.eni.TrocEnchere.dal.DAOFactory;
 import fr.eni.TrocEnchere.dal.articleVendu.ArticleVenduDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleVenduManager {
@@ -36,9 +37,9 @@ public class ArticleVenduManager {
         return articleVendu;
     }
 
-    public List<ArticleVendu> afficherArticles() throws BusinessException {
+    public ArrayList<ArticleVendu> getAll() throws BusinessException {
 
-        return articleVenduDAO.getAll();
+        return (ArrayList<ArticleVendu>) articleVenduDAO.getAll();
     }
 
     public ArticleVendu getById(int id) throws BusinessException {

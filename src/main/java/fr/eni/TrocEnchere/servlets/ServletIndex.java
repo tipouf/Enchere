@@ -1,10 +1,5 @@
 package fr.eni.TrocEnchere.servlets;
 
-import fr.eni.TrocEnchere.BusinessException;
-import fr.eni.TrocEnchere.bo.ArticleVendu;
-import fr.eni.TrocEnchere.bo.Categorie;
-import fr.eni.TrocEnchere.dal.DAOFactory;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -15,6 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bll.ArticleVenduManager;
+import fr.eni.TrocEnchere.bll.CategorieManager;
+import fr.eni.TrocEnchere.bll.UtilisateurManager;
+import fr.eni.TrocEnchere.bo.ArticleVendu;
+import fr.eni.TrocEnchere.bo.Categorie;
+import fr.eni.TrocEnchere.dal.DAOFactory;
+
 @WebServlet("/index")
 public class ServletIndex extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,13 +25,11 @@ public class ServletIndex extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			ArrayList<Categorie> listeCategories = (ArrayList<Categorie>) DAOFactory.getCategorieDAO().getAll();
-			ArrayList<ArticleVendu> listeArticles = (ArrayList<ArticleVendu>) DAOFactory.getArticleVenduDAO().getAll();
+			ArrayList<Categorie> listeCategories = new CategorieManager().getAll();
+			ArrayList<ArticleVendu> listeArticles = new ArticleVenduManager().getAll();
 
 			request.setAttribute("listeCategories", listeCategories);
 			request.setAttribute("listeArticles", listeArticles);
-
-			System.out.println(listeArticles.get(0).getDateFinEncheres());
 
 		} catch (BusinessException e) {
 			System.err.println(e.getMessage());
