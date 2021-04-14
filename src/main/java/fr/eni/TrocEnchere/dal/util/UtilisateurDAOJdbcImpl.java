@@ -102,7 +102,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void update(Utilisateur utilisateur)  throws BusinessException {
+	public void update(Utilisateur utilisateur) {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 
 			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
@@ -259,30 +259,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		return utilisateur;
-	}
-
-	public void update(Utilisateur utilisateur) {
-
-		try(Connection cnx = ConnectionProvider.getConnection()) {
-
-			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
-			pStmt.setString(1, utilisateur.getPseudo().toString());
-			pStmt.setString(2, utilisateur.getNom().toString());
-			pStmt.setString(3, utilisateur.getPrenom().toString());
-			pStmt.setString(4, utilisateur.getEmail().toString());
-			pStmt.setString(5, utilisateur.getTelephone().toString());
-			pStmt.setString(6, utilisateur.getRue().toString());
-			pStmt.setString(7, utilisateur.getCodePostal().toString());
-			pStmt.setString(8, utilisateur.getVille().toString());
-			pStmt.setString(9, utilisateur.getMotDePasse().toString());
-			pStmt.setInt(10, utilisateur.getCredit());
-			pStmt.setBoolean(11, utilisateur.isAdministrateur());
-			pStmt.setInt(12, utilisateur.getNoUtilisateur());
-			pStmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	private Utilisateur parseResultRow(ResultSet rs) {
