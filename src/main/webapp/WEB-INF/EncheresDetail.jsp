@@ -9,6 +9,11 @@
 <html>
 <head>
     <title>Title</title>
+
+    <form action="" method="post">
+        <input type="number" name="montant">
+        <input type="submit" value="Test">
+    </form>
 </head>
 <body>
 

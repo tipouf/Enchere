@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bo.Retrait;
 import fr.eni.TrocEnchere.bo.Utilisateur;
 import fr.eni.TrocEnchere.dal.ConnectionProvider;
 
@@ -57,6 +58,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			"SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur "
 		  + "FROM UTILISATEURS "
 		  + "WHERE email LIKE ? OR pseudo LIKE ?;";
+
+	private static final String DELETE =
+			"DELETE FROM UTILISATEURS" +
+			"WHERE no_utilisateur = ?;";
 	
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
@@ -117,6 +122,25 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		return listeUtilisateurs;
+	}
+
+	@Override
+	public void delete(Utilisateur utilisateur) {
+		this.delete(utilisateur.getNoUtilisateur());
+	}
+
+	@Override
+	public void delete(int noUtilisateur) {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			PreparedStatement pStmt = cnx.prepareStatement(DELETE);
+			pStmt.setInt(1, noUtilisateur);
+
+			pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

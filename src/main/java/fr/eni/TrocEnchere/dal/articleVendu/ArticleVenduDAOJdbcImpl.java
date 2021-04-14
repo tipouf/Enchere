@@ -71,7 +71,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
     @Override
     public ArticleVendu getById(int id) throws BusinessException {
-        List<ArticleVendu> listes = new ArrayList<>();
+        ArticleVendu nouvelArticle = null;
 
         try (Connection cnx = ConnectionProvider.getConnection()) {
             PreparedStatement pStmt = cnx.prepareStatement(GET_BY_ID);
@@ -80,7 +80,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             ResultSet rs = pStmt.executeQuery();
 
             while (rs.next()) {
-                ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+                nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
                         rs.getString("nom_article"),
                         rs.getString("description"),
                         rs.getDate("date_debut_encheres"),
@@ -89,14 +89,13 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
                         rs.getInt("prix_vente"),
                         DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
                         DAOFactory.getCategorieDAO().getById(rs.getInt("no_categorie")));
-                listes.add(nouvelArticle);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return listes.get(0);
+        return nouvelArticle;
     }
 
     @Override
