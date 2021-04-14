@@ -102,7 +102,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
     public void insert(ArticleVendu articleVendu) throws BusinessException {
 
         if(articleVendu == null) {
-            //be.ajouterErreur(CodesResultatDAL.INSERT_OBJECT_NULL);
             throw new BusinessException();
         }
 
