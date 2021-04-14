@@ -1,4 +1,4 @@
-package fr.eni.enchere.servlets;
+package fr.eni.TrocEnchere.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,26 +10,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.TrocEnchere.BusinessException;
+import fr.eni.TrocEnchere.bll.ArticleVenduManager;
+import fr.eni.TrocEnchere.bll.CategorieManager;
+import fr.eni.TrocEnchere.bll.UtilisateurManager;
+import fr.eni.TrocEnchere.bo.ArticleVendu;
+import fr.eni.TrocEnchere.bo.Categorie;
+import fr.eni.TrocEnchere.dal.DAOFactory;
+
 @WebServlet("/index")
 public class ServletIndex extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ArrayList<String> categorie = new ArrayList<String>();
-		categorie.add("test");
-		categorie.add("test2");
-		categorie.add("test3");
+		CategorieManager categorieManager = new CategorieManager();
+		ArticleVenduManager articleManager = new ArticleVenduManager();
+		try {
+			ArrayList<Categorie> listeCategories = categorieManager.getAll()  ;
+			ArrayList<ArticleVendu> listeArticles = (ArrayList<ArticleVendu>) articleManager.afficherArticles() ;
 
-		ArrayList<String> articles = new ArrayList<String>();
-		articles.add("articles1");
-		articles.add("articles2");
-		articles.add("articles3");
-		articles.add("articles4");
+			request.setAttribute("listeCategories", listeCategories);
+			request.setAttribute("listeArticles", listeArticles);
 
+		} catch (BusinessException e) {
+			System.err.println(e.getMessage());
+		}
 		
-		request.setAttribute("categorie", categorie);    
-		request.setAttribute("articles", articles);   
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 		rd.forward(request, response);
 	}
