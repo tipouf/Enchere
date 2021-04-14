@@ -38,7 +38,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             "prix_initial = ?," +
             "prix_vente = ?," +
             "no_utilisateur = ?," +
-            "no_categorie = ?," +
+            "no_categorie = ? " +
             "WHERE no_article = ? ";
 
     @Override

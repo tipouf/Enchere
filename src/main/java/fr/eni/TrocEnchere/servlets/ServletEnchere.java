@@ -104,6 +104,7 @@ public class ServletEnchere extends HttpServlet {
 
             } else {
 
+                // Création ou update de l'enchère
                 Enchere enchere = new Enchere(
                         new java.sql.Date(new Date().getTime()),
                         montantEnchere,
@@ -111,6 +112,9 @@ public class ServletEnchere extends HttpServlet {
                         article
                 );
                 new EnchereManager().upsert(enchere);
+
+                // Modification du prix de vente de l'article
+                articleManager.modifierPrixVente(article, montantEnchere);
 
                 // Déduction des crédits de l'utilisateur
                 utilisateur.setCredit(utilisateur.getCredit() - montantEnchere);

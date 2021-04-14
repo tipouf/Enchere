@@ -14,6 +14,16 @@
         <input type="number" name="montant">
         <input type="submit" value="Test">
     </form>
+
+    <% String error = (String) request.getAttribute("error"); %>
+
+    <%
+        if (error != null) {
+    %>
+    <span class="text-danger"><%=error%></span>
+    <%
+        }
+    %>
 </head>
 <body>
 

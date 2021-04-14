@@ -31,8 +31,6 @@ public class ServletIndex extends HttpServlet {
 			request.setAttribute("listeCategories", listeCategories);
 			request.setAttribute("listeArticles", listeArticles);
 
-			System.out.println(listeArticles.get(0).getDateFinEncheres());
-
 		} catch (BusinessException e) {
 			System.err.println(e.getMessage());
 		}

@@ -37,9 +37,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
           + "WHERE no_utilisateur = ? AND no_article = ?;";
 
     private static final String GET_LATEST_FOR_ARTICLE =
-            "SELECT no_utilisateur, no_article, max(date_enchere), montant_enchere "
+            "SELECT no_utilisateur, no_article, date_enchere, max(montant_enchere) "
                     + "FROM ENCHERES "
-                    + "WHERE no_article = ?;";
+                    + "WHERE no_article = ? " +
+                        "AND montant_enchere = (SELECT MAX(montant_enchere) " +
+                        "                       FROM ENCHERES);";
 
     @Override
     public void upsert(Enchere enchere) throws BusinessException {
