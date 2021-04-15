@@ -34,7 +34,6 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 			try {
 				PreparedStatement pStmt = cnx.prepareStatement(INSERT);
-				//cnx.setAutoCommit(false);
 				pStmt.setInt(1, retrait.getNoArticle());
 				pStmt.setString(2, retrait.getRue());
 				pStmt.setString(3, retrait.getCodePostal());
@@ -42,12 +41,8 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 
 				pStmt.executeUpdate();
 
-				//cnx.commit();
-
 			} catch (SQLException e) {
 				e.printStackTrace();
-
-				//cnx.rollback();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

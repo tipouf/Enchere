@@ -49,7 +49,9 @@ public class ServletEnchere extends HttpServlet {
         } catch (BusinessException e) {
             System.err.println(e.getMessage());
         }
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/EncheresDetail.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+        request.setAttribute("pageAAfficher", "/WEB-INF/EncheresDetail.jsp");
+
         rd.forward(request, response);
     }
 
@@ -60,13 +62,17 @@ public class ServletEnchere extends HttpServlet {
         // L'utilisateur est-il connecté ?
         if (request.getSession().getAttribute("user_id") == null) {
             request.setAttribute("error", "Vous devez être connecté pour pouvoir enchérir.");
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+            request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurConnexion.jsp");
+
             rd.forward(request, response);
         }
 
         // L'URL est-elle au format /enchere/articleId
         if (request.getPathInfo() == null) {
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+            request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
+
             rd.forward(request, response);
         }
 
@@ -86,12 +92,14 @@ public class ServletEnchere extends HttpServlet {
             // L'utilisateur a-t-il suffisement de crédits pour poser cette enchère ?
             if (utilisateur.getCredit() < montantEnchere) {
                 request.setAttribute("error", "Vous ne disposez pas de suffisement de crédits pour poser cette enchère.");
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/EncheresDetail.jsp");
+                request.setAttribute("pageAAfficher", "/WEB-INF/EncheresDetail.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
                 rd.forward(request, response);
 
             } else if (latestEnchere != null && latestEnchere.getMontantEnchere() > montantEnchere) {
                 request.setAttribute("error", "Vous devez proposer un prix supérieur à l'enchère précédente.");
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/EncheresDetail.jsp");
+                request.setAttribute("pageAAfficher", "/WEB-INF/EncheresDetail.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
                 rd.forward(request, response);
 
             // Empêche l'utilisateur d'énchérir sur sa propre enchère, pour éviter le problème du select asynchrone avec l'update
@@ -99,7 +107,8 @@ public class ServletEnchere extends HttpServlet {
             //        l'utilisateur avant que l'update de ses crédits ne soit terminé, et donc annuler cette opération
             } else if (latestEnchere != null && utilisateur.getNoUtilisateur() == latestEnchere.getUtilisateur().getNoUtilisateur()) {
                 request.setAttribute("error", "Vous ne pouvez pas enchérir sur votre propre enchère");
-                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/EncheresDetail.jsp");
+                request.setAttribute("pageAAfficher", "/WEB-INF/EncheresDetail.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
                 rd.forward(request, response);
 
             } else {
@@ -131,7 +140,8 @@ public class ServletEnchere extends HttpServlet {
             System.err.println(e.getMessage());
         }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+        request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
         rd.forward(request, response);
     }
 }
