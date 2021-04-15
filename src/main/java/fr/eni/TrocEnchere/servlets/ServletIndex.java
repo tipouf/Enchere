@@ -39,7 +39,7 @@ public class ServletIndex extends HttpServlet {
 			String categorieWithAccent = new String(categorie.getBytes(), Charset.forName("UTF-8"));
 
 			if(recherche != null) {
-				rechercheWithAccent = new String(recherche.getBytes(),Charset.forName("UTF-8"));
+				rechercheWithAccent = new String(recherche.getBytes(), Charset.forName("UTF-8"));
 			}
 			ArrayList<Categorie> listeCategories = categorieManager.getAll()  ;
 			request.setAttribute("listeCategories", listeCategories);
