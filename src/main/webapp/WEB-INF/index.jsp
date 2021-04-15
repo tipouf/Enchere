@@ -15,10 +15,10 @@
                         <div class="input-group-btn search-panel">
                             <select class="btn btn-default dropdown-toggle"
                                     data-toggle="dropdown" name="categorie">
-                                <option value="toute">Toutes</option>
+                                <option value="0">Toutes</option>
                                 <c:forEach items="${listeCategories}" var="item">
-                                    <option value="${item.libelle}"
-                                        ${item.libelle == categorieSelectionnee ? 'selected="selected"' : ''}>${item.libelle}</option>
+                                    <option value="${item.noCategorie}"
+                                        ${item.noCategorie == categorieSelectionnee ? 'selected="selected"' : ''}>${item.libelle}</option>
                                 </c:forEach>
                             </select>
                         </div>
