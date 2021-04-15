@@ -7,3 +7,7 @@
 button {
     width:20%;
 }
+a .card{
+    pointer-events: none;
+    color: black;
+}

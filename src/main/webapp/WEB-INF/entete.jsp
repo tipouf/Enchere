@@ -1,6 +1,6 @@
 <c:set var="context" value="${pageContext.request.contextPath}"/>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="${pageContext.request.contextPath}/index">ENI Enchères</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,7 @@
                                         profil</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="${context}/ServletDeconnexion">Déconnexion</a>
+                                    <a class="nav-link float-end" aria-current="page" href="${context}/ServletDeconnexion">Déconnexion</a>
                                 </li>
                             </c:when>
                             <c:otherwise>
