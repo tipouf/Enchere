@@ -10,8 +10,8 @@
 <div class="row text-center">
 	<c:choose>
 		<c:when test="${fn:length(listeArticles) == 0}">
-			<div class="alert alert-dark" role="alert">Aucun articles ne
-				correspond à votre recherche;</div>
+			<div class="alert alert-dark" role="alert">Aucun article ne
+				correspond à votre recherche.</div>
 		</c:when>
 		<c:otherwise>
 			<c:forEach items="${listeArticles}" var="article">
@@ -23,7 +23,7 @@
 								alt="img">
 							<div class="card-body">
 								<h4 class="text-center">${article.getNomArticle()}</h4>
-								<div>${article.getPrixVente()}point(s)</div>
+								<div>${article.getPrixVente()} point(s)</div>
 								<div>
 									Fin de l'enchere:
 									<fmt:formatDate value="${article.getDateFinEncheres()}"
