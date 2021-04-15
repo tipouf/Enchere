@@ -3,16 +3,12 @@
 <%
     String error = (String) request.getAttribute("error");
 %>
-
-<!-- Custom styles for this template -->
-<link href="${context}/css/connexion.css"
-      rel="stylesheet">
-<%--<%@include file="entete.jsp" %>--%>
-<div class="container jumbotron marginConnexion">
-    <h1 class="display-4 text-left">Connexion</h1>
+<div class="card mt-5">
+    <div class="card-header">
+        <h1 class="card-title text-left">Connexion</h1>
+    </div>
     <div class="card-body">
         <form action="<%=request.getContextPath()%>/connexion" method="post">
-
             <div class=" form-group row">
                 <label for="lastName" class="col-sm-2 col-form-label">Identifiant:</label>
                 <div class="col-sm-4">
@@ -34,14 +30,15 @@
                     }
                 %>
             </div>
-            <div class="clearfix mt-3 login-buttons">
-                <button type="submit" class="btn btn-primary float-end"
-                        data-dismiss="modal">
-                    <span class="glyphicon glyphicon-remove"></span>Connexion
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary float-end">
+                    Connexion
                 </button>
-                <a class="btn btn-danger float-end"
-                   href="${context}/inscription"
-                   data-dismiss="modal"> Créer un compte </a>
+                <a href="${context}/inscription">
+                    <button class="btn btn-info float-end">
+                        Créer un compte
+                    </button>
+                </a>
             </div>
         </form>
     </div>

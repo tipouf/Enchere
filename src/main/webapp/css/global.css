@@ -1,4 +1,4 @@
-.body{
+body{
     background-color: #3a444f;
 }
 .dropdown-item.active, .dropdown-item:active{
@@ -10,4 +10,40 @@ button {
 a .card{
     pointer-events: none;
     color: black;
+}
+/*.bg-light-grey{*/
+/*}*/
+.card{
+    background-color: lightgray;
+}
+.btn-primary{
+    color: white;
+    background-color: #212529;
+    border-color: lightgray;
+}
+.btn-primary:active{
+    color: black;
+    background-color: transparent;
+    border-color: #212529;
+}
+.btn-primary:hover{
+    color: black;
+    background-color: transparent;
+    border-color: #212529;
+}
+
+.btn-info{
+    color: white;
+    background-color: #3a444f;
+    border-color: lightgray;
+}
+.btn-info:active{
+    color: black;
+    background-color: transparent;
+    border-color: #3a444f;
+}
+.btn-info:hover{
+    color: black;
+    background-color: transparent;
+    border-color: #3a444f;
 }
