@@ -1,6 +1,5 @@
 package fr.eni.TrocEnchere.bll;
 
-import fr.eni.TrocEnchere.BusinessException;
 import fr.eni.TrocEnchere.bo.Categorie;
 import fr.eni.TrocEnchere.dal.DAOFactory;
 import fr.eni.TrocEnchere.dal.categorie.CategorieDAO;
@@ -20,9 +19,5 @@ public class CategorieManager {
 
     public Categorie getById(int id){
         return categorieDAO.getById(id);
-    }
-
-    public int getByLibelle(String libelle) throws BusinessException {
-        return categorieDAO.getByLibelle(libelle);
     }
 }
