@@ -56,7 +56,6 @@ public class ServletIndex extends HttpServlet {
 
 			if(!categorie.equalsIgnoreCase("toutes") && recherche == null){
 				int noCategorie = categorieManager.getByLibelle(categorie);
-				System.out.println("noCategorie = " + noCategorie);
 				listeArticles = (ArrayList<ArticleVendu>) articleManager.filtreParCategorie(noCategorie) ;
 			};
 

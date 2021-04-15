@@ -44,10 +44,8 @@ public class ServletModifierProfil extends HttpServlet {
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 
-		System.out.println("fonction => " + fonction);
 
 		if (fonction.trim().equalsIgnoreCase(enregistrer.trim())) {
-			System.out.println("i am here");
 			if (!utilisateur.getPseudo().equalsIgnoreCase(pseudo)) {
 				if (!utilisateurManager.isPseudoAvailable(pseudo)) {
 					error = "Le pseudo existe déjà";
@@ -92,7 +90,6 @@ public class ServletModifierProfil extends HttpServlet {
 
 
 		if (fonction.equalsIgnoreCase("supprimer")) {
-			System.out.println("je suppr");
 			try {
 				utilisateurManager.delete(idSession);
 			        session.invalidate();
