@@ -66,15 +66,15 @@ public class ArticleVenduManager {
         return articleVenduDAO.getById(id);
     }
 
-    public List<ArticleVendu> filtreParTitre(String recherche) throws BusinessException {
+   public List<ArticleVendu> filtreParTitre(String recherche) {
 		return articleVenduDAO.filtreParTitre(recherche);
 	}
 
-	public List<ArticleVendu> filtreParCategorie(int noCategorie) throws BusinessException {
+	public List<ArticleVendu> filtreParCategorie(int noCategorie) {
 		return articleVenduDAO.filtreParCategorie(noCategorie);
 	}
 	
-	public List<ArticleVendu> filtreParRechercheEtCategorie(String recherche, int noCategorie) throws BusinessException {
+	public List<ArticleVendu> filtreParRechercheEtCategorie(String recherche, int noCategorie) {
 		return articleVenduDAO.filtreParRechercheEtCategorie(recherche, noCategorie);
 	}
 }

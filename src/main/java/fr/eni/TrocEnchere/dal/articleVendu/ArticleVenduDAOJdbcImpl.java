@@ -41,10 +41,9 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             "no_categorie = ? " +
             "WHERE no_article = ? ";
 
-    private static final String FILTER_BY_TITLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
+ private static final String FILTER_BY_TITLE = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
 	private static final String FILTER_BY_CATEGORY = "SELECT * FROM ARTICLES_VENDUS WHERE no_categorie = ?";
 	private static final String FILTER_BY_TITLE_CATEGORY = "SELECT * FROM ARTICLES_VENDUS WHERE nom_article LIKE ? AND no_Categorie = ?";
-
 
     @Override
     public List<ArticleVendu> getAll() throws BusinessException {
@@ -174,8 +173,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
             e.printStackTrace();
         }
     }
-    	@Override
-	public List<ArticleVendu> filtreParTitre(String nomRecherche) throws BusinessException {
+      	@Override
+	public List<ArticleVendu> filtreParTitre(String nomRecherche) {
 		List<ArticleVendu> listes = new ArrayList<>();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -184,11 +183,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs = pStmt.executeQuery();
 
 			while (rs.next()) {
-				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-						rs.getString("nomArticle"),
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+						rs.getString("nom_article"),
 						rs.getString("description"),
 						rs.getDate("date_debut_encheres"),
-						rs.getDate("date_debut_fin"),
+						rs.getDate("date_fin_encheres"),
 						rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"),
 						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
@@ -203,7 +202,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> filtreParCategorie(int noCategorie) throws BusinessException {
+	public List<ArticleVendu> filtreParCategorie(int noCategorie) {
 		List<ArticleVendu> listes = new ArrayList<>();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -212,11 +211,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs=pStmt.executeQuery();
 
 			while (rs.next()) {
-				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-						rs.getString("nomArticle"),
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+						rs.getString("nom_article"),
 						rs.getString("description"),
 						rs.getDate("date_debut_encheres"),
-						rs.getDate("date_debut_fin"),
+						rs.getDate("date_fin_encheres"),
 						rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"),
 						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
@@ -231,7 +230,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> filtreParRechercheEtCategorie(String nomRecherche, int noCategorie) throws BusinessException {
+	public List<ArticleVendu> filtreParRechercheEtCategorie(String nomRecherche, int noCategorie) {
 		List<ArticleVendu> listes = new ArrayList<>();
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -241,11 +240,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs=pStmt.executeQuery();
 
 			while (rs.next()) {
-				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("noArticle"),
-						rs.getString("nomArticle"),
+				ArticleVendu nouvelArticle = new ArticleVendu(rs.getInt("no_article"),
+						rs.getString("nom_article"),
 						rs.getString("description"),
 						rs.getDate("date_debut_encheres"),
-						rs.getDate("date_debut_fin"),
+						rs.getDate("date_fin_encheres"),
 						rs.getInt("prix_initial"),
 						rs.getInt("prix_vente"),
 						DAOFactory.getUtilisateurDAO().getById(rs.getInt("no_utilisateur")),
@@ -258,4 +257,3 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 		return listes;
 	}
-}
