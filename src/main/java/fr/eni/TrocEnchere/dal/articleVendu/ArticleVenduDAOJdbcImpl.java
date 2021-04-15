@@ -113,7 +113,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
         try (Connection cnx = ConnectionProvider.getConnection()) {
 
             try {
-                PreparedStatement pStmt = cnx.prepareStatement(INSERT);
+                PreparedStatement pStmt = cnx.prepareStatement(INSERT,Statement.RETURN_GENERATED_KEYS);
                 pStmt.setString(1, articleVendu.getNomArticle());
                 pStmt.setString(2, articleVendu.getDescription());
                 pStmt.setDate(3, articleVendu.getDateDebutEncheres());
@@ -125,8 +125,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
                 pStmt.executeUpdate();
 
-                cnx.commit();
-
                 ResultSet rs = pStmt.getGeneratedKeys();
                 if(rs.next()) {
                     articleVendu.setNoArticle(rs.getInt(1));
@@ -134,8 +132,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-
-                cnx.rollback();
             }
         } catch (SQLException e) {
             e.printStackTrace();

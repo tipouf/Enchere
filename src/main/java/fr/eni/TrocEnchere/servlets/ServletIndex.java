@@ -1,6 +1,7 @@
 package fr.eni.TrocEnchere.servlets;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -13,10 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.TrocEnchere.BusinessException;
 import fr.eni.TrocEnchere.bll.ArticleVenduManager;
 import fr.eni.TrocEnchere.bll.CategorieManager;
-import fr.eni.TrocEnchere.bll.UtilisateurManager;
 import fr.eni.TrocEnchere.bo.ArticleVendu;
 import fr.eni.TrocEnchere.bo.Categorie;
-import fr.eni.TrocEnchere.dal.DAOFactory;
 
 @WebServlet("/index")
 public class ServletIndex extends HttpServlet {
@@ -37,7 +36,7 @@ public class ServletIndex extends HttpServlet {
 				categorie = "toutes";
 			}
 
-			String categorieWithAccent = new String(categorie.getBytes(),Charset.forName("UTF-8"));
+			String categorieWithAccent = new String(categorie.getBytes(), Charset.forName("UTF-8"));
 
 			if(recherche != null) {
 				rechercheWithAccent = new String(recherche.getBytes(),Charset.forName("UTF-8"));
@@ -74,7 +73,8 @@ public class ServletIndex extends HttpServlet {
 			System.err.println(e.getMessage());
 		}
 
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
+		request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
 		rd.forward(request, response);
 	}
 

@@ -1,28 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 
 <%
     String error = (String) request.getAttribute("error");
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Page de connexion</title>
     <c:set var="context" value="${pageContext.request.contextPath}"/>
-    <!-- Bootstrap core CSS -->
-    <link href="${context}/vendor/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="${context}/css/inscription.css" rel="stylesheet">
-</head>
-<body>
-<%@include file="entete.jsp" %>
-<div class="container jumbotron marginInscription">
+
+<div class="jumbotron marginInscription">
     <h1 class="display-4 text-left">Créer profil</h1>
     <div class="card-body">
         <form action="<%=request.getContextPath()%>/inscription"
@@ -108,9 +94,3 @@
         </button>
     </div>
 </div>
-
-<!-- Bootstrap core JavaScript -->
-<script src="${context}/vendor/jquery/jquery.min.js"></script>
-<script src="${context}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>

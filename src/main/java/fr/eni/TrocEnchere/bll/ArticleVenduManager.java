@@ -78,4 +78,3 @@ public class ArticleVenduManager {
 		return articleVenduDAO.filtreParRechercheEtCategorie(recherche, noCategorie);
 	}
 }
-}

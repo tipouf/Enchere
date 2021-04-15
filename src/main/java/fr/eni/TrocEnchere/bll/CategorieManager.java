@@ -14,11 +14,11 @@ public class CategorieManager {
         categorieDAO = DAOFactory.getCategorieDAO();
     }
 
-    public ArrayList<Categorie> getAll() throws BusinessException {
+    public ArrayList<Categorie> getAll() {
         return (ArrayList<Categorie>) categorieDAO.getAll();
     }
 
-    public Categorie getById(int id) throws BusinessException {
+    public Categorie getById(int id){
         return categorieDAO.getById(id);
     }
 
