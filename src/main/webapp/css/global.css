@@ -4,18 +4,22 @@ body{
 .dropdown-item.active, .dropdown-item:active{
     background-color: #212529!important;
 }
-button {
-    width:20%;
-}
+
+/* Style des cards */
 a .card{
     pointer-events: none;
     color: black;
 }
-/*.bg-light-grey{*/
-/*}*/
 .card{
     background-color: lightgray;
 }
+
+/* Style des boutons */
+button {
+    min-width:20%;
+}
+
+/* Style primary */
 .btn-primary{
     color: white;
     background-color: #212529;
@@ -32,6 +36,7 @@ a .card{
     border-color: #212529;
 }
 
+/* Style danger */
 .btn-danger{
     color: white;
     background-color: #dc3545;
@@ -48,6 +53,7 @@ a .card{
     border-color: #dc3545;
 }
 
+/* Style info */
 .btn-info{
     color: white;
     background-color: #3a444f;

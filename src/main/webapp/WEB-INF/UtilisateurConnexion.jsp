@@ -30,15 +30,19 @@
                     }
                 %>
             </div>
-            <div class="mt-3">
-                <button type="submit" class="btn btn-primary float-end">
-                    Connexion
-                </button>
-                <a href="${context}/inscription">
-                    <button class="btn btn-info float-end">
+            <div class="row mt-3">
+                <div class="col-6 text-start">
+                    <button class="btn btn-danger" onclick="window.location='${pageContext.request.contextPath}/index';return false;">Annuler</button>
+                </div>
+                <div class="col-6 text-end">
+                    <button class="btn btn-info"
+                            onclick="window.location='${pageContext.request.contextPath}/inscription';return false;">
                         Créer un compte
                     </button>
-                </a>
+                    <button type="submit" class="btn btn-primary">
+                        Connexion
+                    </button>
+                </div>
             </div>
         </form>
     </div>
