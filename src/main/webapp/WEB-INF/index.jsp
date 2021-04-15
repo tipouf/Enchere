@@ -10,8 +10,8 @@
 </div>
 
 <!-- Jumbotron Header -->
-<div class="jumbotron my-4">
-    <div class="container">
+<div class="card my-4">
+    <div class="card-body">
         <h3>Filtres:</h3>
         <div class="row flex-d">
             <div class="col-xs-8 col-xs-offset-2">

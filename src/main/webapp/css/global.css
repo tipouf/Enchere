@@ -4,3 +4,6 @@
 .dropdown-item.active, .dropdown-item:active{
     background-color: #212529!important;
 }
+button {
+    width:20%;
+}
