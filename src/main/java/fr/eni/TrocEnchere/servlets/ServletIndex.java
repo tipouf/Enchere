@@ -1,6 +1,7 @@
 package fr.eni.TrocEnchere.servlets;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -37,10 +38,10 @@ public class ServletIndex extends HttpServlet {
 				categorie = "toutes";
 			}
 
-			String categorieWithAccent = new String(categorie.getBytes(),Charset.forName("UTF-8"));
+			String categorieWithAccent = new String(categorie.getBytes(), Charset.forName("UTF-8"));
 
 			if(recherche != null) {
-				rechercheWithAccent = new String(recherche.getBytes(),Charset.forName("UTF-8"));
+				rechercheWithAccent = new String(recherche.getBytes(), Charset.forName("UTF-8"));
 			}
 			ArrayList<Categorie> listeCategories = categorieManager.getAll()  ;
 			request.setAttribute("listeCategories", listeCategories);
