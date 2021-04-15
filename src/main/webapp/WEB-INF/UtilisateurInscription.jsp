@@ -8,8 +8,10 @@
     <!-- Custom styles for this template -->
     <link href="${context}/css/inscription.css" rel="stylesheet">
 
-<div class="jumbotron marginInscription">
-    <h1 class="display-4 text-left">Créer profil</h1>
+<div class="card mt-5">
+    <div class="card-header">
+        <h1 class="card-title text-left">Créer profil</h1>
+    </div>
     <div class="card-body">
         <form action="<%=request.getContextPath()%>/inscription"
               method="post">
