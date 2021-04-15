@@ -8,20 +8,22 @@
 <div class="row text-center">
     <c:forEach items="${listeArticles}" var="article">
         <div class="col-lg-4 col-md-6 mb-4">
-            <button class="card h-100 curseurOnCard" href="${context}/enchere/${article.getNoArticle()}">
-                <img class="card-img-top" src="http://placeimg.com/400/400/tech" alt="img">
-                <div class="card-body width-center">
-                    <h4 class="card-title text-center">${article.getNomArticle()}</h4>
-                    <p class="card-text ml-auto">
-                    <div>${article.getPrixVente()}
-                    </div>
-                    <div>Fin de l'enchere: <fmt:formatDate value="${article.getDateFinEncheres()}"
-                                                           pattern="dd/MM/yyyy"/>
-                    </div>
-                    <div>Vendeur: ${article.getProprietaire().getPseudo()}
+            <a href="${context}/enchere/${article.getNoArticle()}">
+                <div class="card h-100 curseurOnCard">
+                    <img class="card-img-top" src="http://placeimg.com/400/400/tech" alt="img">
+                    <div class="card-body width-center">
+                        <h4 class="card-title text-center">${article.getNomArticle()}</h4>
+                        <p class="card-text ml-auto">
+                        <div>${article.getPrixVente()}
+                        </div>
+                        <div>Fin de l'enchere: <fmt:formatDate value="${article.getDateFinEncheres()}"
+                                                               pattern="dd/MM/yyyy"/>
+                        </div>
+                        <div>Vendeur: ${article.getProprietaire().getPseudo()}
+                        </div>
                     </div>
                 </div>
-            </button>
+            </a>
         </div>
     </c:forEach>
 </div>
