@@ -82,6 +82,6 @@ public class ServletInscription extends HttpServlet {
             rd.forward(request, response);
         }
 
-        response.sendRedirect(request.getContextPath() + "/UtilisateurConnexion");
+        response.sendRedirect(request.getContextPath() + "/connexion");
     }
 }
