@@ -58,14 +58,14 @@ public class ServletConnexion extends HttpServlet {
 			} else {
 				rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
 				request.setAttribute("error", "Mot de passe incorrect");
-				request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
+				request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurConnexion.jsp");
 
 			}
 
 		} else {
 			rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
 			request.setAttribute("error", "Utilisateur incorrect");
-			request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
+			request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurConnexion.jsp");
 
 		}
 
