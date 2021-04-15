@@ -20,17 +20,18 @@ import java.util.Date;
 public class ServletEnchere extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
 
         // L'utilisateur est-il connecté ?
         if (request.getSession().getAttribute("user_id") == null) {
             request.setAttribute("error", "Vous devez être connecté pour accéder à cette partie du site.");
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/UtilisateurConnexion.jsp");
+            request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurConnexion.jsp");
             rd.forward(request, response);
         }
 
         // L'URL est-elle au format /enchere/articleId
         if (request.getPathInfo() == null) {
-            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
             rd.forward(request, response);
         }
 
@@ -52,9 +53,8 @@ public class ServletEnchere extends HttpServlet {
         } catch (BusinessException e) {
             System.err.println(e.getMessage());
         }
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
-        request.setAttribute("pageAAfficher", "/WEB-INF/EncheresDetail.jsp");
 
+        request.setAttribute("pageAAfficher", "/WEB-INF/EncheresDetail.jsp");
         rd.forward(request, response);
     }
 
