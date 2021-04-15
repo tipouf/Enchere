@@ -10,7 +10,7 @@
 
 <div class="card mt-5">
     <div class="card-header">
-        <h1 class="card-title text-left">Créer profil</h1>
+        <h1 class="card-title">Créer profil</h1>
     </div>
     <div class="card-body">
         <form action="<%=request.getContextPath()%>/inscription"
@@ -87,16 +87,18 @@
             <span class="text-danger"><%= error %></span>
             <% } %>
 
-            <div class="row mt-2">
+            <div class="row mt-3">
                 <div class="col-6 text-start">
-                    <button class="btn btn-danger" onclick="window.location='${pageContext.request.contextPath}/connexion';return false;">Annuler</button>
+                    <button class="btn btn-danger" onclick="window.location='${pageContext.request.contextPath}/index';return false;">Annuler</button>
                 </div>
                 <div class="col-6 text-end">
+                    <button class="btn btn-info" onclick="window.location='${pageContext.request.contextPath}/connexion';return false;">
+                        Se connecter
+                    </button>
                     <button type="submit" class="btn btn-primary">
                             Créer
                     </button>
                 </div>
-
             </div>
         </form>
     </div>
