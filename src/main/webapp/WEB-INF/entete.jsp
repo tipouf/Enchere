@@ -7,12 +7,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <c:choose>
-                    <c:when test="${pageAAfficher != 'UtilisateurConnexion.jsp'
+            <c:choose>
+                <c:when test="${pageAAfficher != 'UtilisateurConnexion.jsp'
 				&& pageAAfficher != 'UtilisateurInscription.jsp' }">
-                        <c:choose>
-                            <c:when test="${sessionScope.user_id != null}">
+                    <c:choose>
+                        <c:when test="${sessionScope.user_id != null}">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="${context}/ajoutArticle">Enchères</a>
                                 </li>
@@ -24,11 +24,16 @@
                                     <a class="nav-link" aria-current="page" href="${context}/ServletProfil">Mon
                                         profil</a>
                                 </li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link float-end" aria-current="page" href="${context}/ServletDeconnexion">Déconnexion</a>
+                                    <a class="nav-link float-end" aria-current="page"
+                                       href="${context}/ServletDeconnexion">Déconnexion</a>
                                 </li>
-                            </c:when>
-                            <c:otherwise>
+                            </ul>
+                        </c:when>
+                        <c:otherwise>
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,11 +44,11 @@
                                         <li><a class="dropdown-item" href="${context}/inscription">Inscription</a></li>
                                     </ul>
                                 </li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:when>
-                </c:choose>
-            </ul>
+                            </ul>
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+            </c:choose>
         </div>
     </div>
 </nav>
