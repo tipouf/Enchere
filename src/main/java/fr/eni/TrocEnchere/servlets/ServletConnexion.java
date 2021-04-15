@@ -50,25 +50,20 @@ public class ServletConnexion extends HttpServlet {
 				
 				// Ajout d'une variable de session "user_id" pour autoriser l'accès aux autres pages du site
 				request.getSession().setAttribute("user_id", utilisateurManager.getByEmailOrPseudo(emailOrPseudo).getNoUtilisateur());
-				
-				rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
-				request.setAttribute("pageAAfficher", "/WEB-INF/index.jsp");
-
+				response.sendRedirect(request.getContextPath() + "/index");
 
 			} else {
 				rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
 				request.setAttribute("error", "Mot de passe incorrect");
 				request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurConnexion.jsp");
-
+				rd.forward(request, response);
 			}
 
 		} else {
 			rd = request.getRequestDispatcher("/WEB-INF/base.jsp");
 			request.setAttribute("error", "Utilisateur incorrect");
 			request.setAttribute("pageAAfficher", "/WEB-INF/UtilisateurConnexion.jsp");
-
+			rd.forward(request, response);
 		}
-
-		rd.forward(request, response);
 	}
 }
