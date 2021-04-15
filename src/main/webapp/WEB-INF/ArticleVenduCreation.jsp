@@ -2,9 +2,9 @@
 
 <div class="card mt-5">
     <div class="card-header">
-        <label class="card-title">
+        <h1 class="card-title">
             Ajout d'un article
-        </label>
+        </h1>
     </div>
     <div class="card-body">
         <%
@@ -81,9 +81,11 @@
                                class="form-control">
                     </div>
                 </div>
-
-                <div class="col-12 text-end">
-                    <button type="submit" class="btn btn-primary mb-3 ">Creer</button>
+                <div class="col-6 text-start">
+                    <button class="btn btn-danger" onclick="window.location='${pageContext.request.contextPath}/index';return false;">Annuler</button>
+                </div>
+                <div class="col-6 text-end">
+                    <button type="submit" class="btn btn-primary">Creer</button>
                 </div>
             </div>
 
