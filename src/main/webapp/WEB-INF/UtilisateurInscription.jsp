@@ -85,12 +85,17 @@
             <span class="text-danger"><%= error %></span>
             <% } %>
 
-            <div class="bouton text-center mt-3">
-                <button type="submit" class="btn btn-primary">Créer</button>
+            <div class="row mt-2">
+                <div class="col-6 text-start">
+                    <button class="btn btn-danger" onclick="window.location='${pageContext.request.contextPath}/connexion';return false;">Annuler</button>
+                </div>
+                <div class="col-6 text-end">
+                    <button type="submit" class="btn btn-primary">
+                            Créer
+                    </button>
+                </div>
+
             </div>
         </form>
-        <button class="btn btn-primary"
-                onclick="${pageContext.request.contextPath}/login">Annuler
-        </button>
     </div>
 </div>
