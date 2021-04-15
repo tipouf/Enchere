@@ -74,10 +74,10 @@
         </div>
         <div class="row">
             <div class="col-2">
-                <label for="lastName" class="fw-bold">Crédit(s):</label>
+                <label for="credit" class="fw-bold">Crédit(s):</label>
             </div>
             <div class="col-8">
-                <label for="lastName">${monProfil.credit} point(s)</label>
+                <label for="credit">${monProfil.credit} point(s)</label>
             </div>
         </div>
         <div class="clearfix mt-3 login-buttons">
