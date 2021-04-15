@@ -101,8 +101,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
-	@Override
-	public void update(Utilisateur utilisateur)  throws BusinessException {
+@Override
+	public void update(Utilisateur utilisateur) {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 
 			PreparedStatement pStmt = cnx.prepareStatement(UPDATE);
@@ -114,7 +114,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pStmt.setString(6, utilisateur.getRue().toString());
 			pStmt.setString(7, utilisateur.getCodePostal().toString());
 			pStmt.setString(8, utilisateur.getVille().toString());
-			pStmt.setInt(9, utilisateur.getNoUtilisateur());
+			pStmt.setString(9, utilisateur.getMotDePasse().toString());
+			pStmt.setInt(10, utilisateur.getCredit());
+			pStmt.setBoolean(11, utilisateur.isAdministrateur());
+			pStmt.setInt(12, utilisateur.getNoUtilisateur());
 
 			pStmt.executeUpdate();
 
@@ -122,7 +125,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			e.printStackTrace();
 		}
 	}	
-
 
 	@Override
 	public ArrayList<Utilisateur> getAll() {
