@@ -14,7 +14,7 @@
                         <c:when test="${sessionScope.user_id != null}">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="${context}/ajoutArticle">EnchÃ¨res</a>
+                                    <a class="nav-link" aria-current="page" href="${context}/mesEncheres">Enchères</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="${context}/ajoutArticle">Vendre un
@@ -28,7 +28,7 @@
                             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
                                     <a class="nav-link float-end" aria-current="page"
-                                       href="${context}/ServletDeconnexion">DÃ©connexion</a>
+                                       href="${context}/ServletDeconnexion">Déconnexion</a>
                                 </li>
                             </ul>
                         </c:when>
