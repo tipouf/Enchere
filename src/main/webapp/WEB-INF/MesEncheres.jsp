@@ -1,10 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}" />
 
-<div class="d-flex justify-content-center mt-5">
-	<img src="${context}/img/logo.png">
-</div>
-
 <div class="card my-4">
 	<div class="card-body bg-light-grey">
 		<h3>Filtres:</h3>
@@ -58,26 +54,26 @@
 							<div class="row">
 								<div class="col-4">
 									<input type="checkbox" id="EncheresEncours"
-										name="enchereEnCours"> <label>Mes enchères en
+										name="enchereEnCours"> <label>Mes enchï¿½res en
 										cours</label>
 								</div>
 
 								<div class="col-4">
 									<input type="checkbox" id="venteNonDebutees"
-										name="ventesNonDebutées"> <label>Ventes non
-										débutées</label>
+										name="ventesNonDebutï¿½es"> <label>Ventes non
+										dï¿½butï¿½es</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-4">
 									<input type="checkbox" id="encheresRemportees"
-										name="enchereRemportees"> <label>Mes enchères
-										remportées</label>
+										name="enchereRemportees"> <label>Mes enchï¿½res
+										remportï¿½es</label>
 								</div>
 
 								<div class="col-4">
 									<input type="checkbox" id="venteTerminees"
-										name="venteTerminees"> <label>Vente terminées</label>
+										name="venteTerminees"> <label>Vente terminï¿½es</label>
 								</div>
 							</div>
 						</c:if>
